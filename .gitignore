@@ -1,5 +1,13 @@
 # Compiled class file
 *.class
+.DS_Store
+.idea/
+src/.DS_Store
+src/main/.DS_Store
+src/main/java/.DS_Store
+src/main/java/chapter2/.DS_Store
+src/main/java/chapter3/.DS_Store
+src/main/java/homework/.DS_Store
 
 # Log file
 *.log
