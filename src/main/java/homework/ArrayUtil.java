@@ -14,14 +14,12 @@ public class ArrayUtil {
             if (maxValue < array[i]) {
                 maxValue = array[i];
             }
-        }
-        System.out.println("max value: " + maxValue);
-
-        for (int i = 0; i < array.length; i++) {
             if (minValue > array[i]) {
                 minValue = array[i];
             }
         }
+        System.out.println("max value: " + maxValue);
+
         System.out.println("min value: " + minValue);
     }
 }
