@@ -4,8 +4,8 @@ public class ArrayUtil {
 
     public static void main(String[] args) {
         int[] array = {-2, 5, 8, 23, 54, 754, 2466, 3, 97, 45};
-        int maxValue = 0;
-        int minValue = 0;
+        int maxValue = array[1];
+        int minValue = array[1];
         for (int i = 0; i < array.length; i++) {
             System.out.println(array[i]);
         }
