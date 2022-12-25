@@ -8,7 +8,7 @@ public class ArrayUtil2 {
         int x = 0;
         System.out.print("1:Զույգ էլեմենտները: ");
         for (int i = 0; i < array.length; i++) {
-            if (i % 2 == 0) {
+            if (array[i] % 2 == 0) {
                 a++;
                 System.out.print(array[i] + " ");
             }
@@ -16,12 +16,12 @@ public class ArrayUtil2 {
 
         System.out.print("\n2:Կենտ էլեմենտները: ");
         for (int i = 0; i < array.length; i++) {
-            if (i % 2 != 0) {
+            if (array[i] % 2 != 0) {
                 b++;
                 System.out.print(array[i] + " ");
             }
         }
-        System.out.println("3:Կենտերի և զույգերի քանակը: " + a + "   " + b);
+        System.out.println("\n3:Կենտերի և զույգերի քանակը: " + a + "   " + b);
 
         for (int i = 0; i < array.length; i++) {
             x += array[i];
