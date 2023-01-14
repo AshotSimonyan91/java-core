@@ -14,9 +14,8 @@ public class Calculator {
         if (numbertwo == 0) {
             System.out.println("The number is not divided to 0");
             return -1;
-        } else {
-            return numberone / numbertwo;
         }
+        return numberone / numbertwo;
     }
 
     double multiply(double numberone, double numbertwo) {
