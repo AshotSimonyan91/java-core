@@ -46,28 +46,20 @@ public class DynamicArray {
     }
 
     public void delete(int index) {
-        if (index >= 0 && index < array.length) {
+        if (index >= 0 && index < arrayIndex) {
             if (arrayIndex == 0) {
                 System.out.println("Array is empty");
             } else {
-                if (index >= 0 && index < array.length - 1) {
-                    int[] arrayOne = new int[array.length - 1];
-                    for (int i = 0; i < index; i++) {
-                        arrayOne[i] = array[i];
+                int j = 0;
+                int[] arrayTwo = new int[array.length - 1];
+                for (int i = 0; i < array.length; i++) {
+                    if (index != i) {
+                        arrayTwo[j] = array[i];
+                        j++;
                     }
-                    for (int i = index + 1; i < array.length; i++) {
-                        arrayOne[i - 1] = array[i];
-                    }
-                    array = arrayOne;
-                    arrayIndex--;
-                } else {
-                    int[] arrayTwo = new int[array.length - 1];
-                    for (int i = 0; i < arrayTwo.length; i++) {
-                        arrayTwo[i] = array[i];
-                    }
-                    array = arrayTwo;
-                    arrayIndex--;
                 }
+                array = arrayTwo;
+                arrayIndex--;
             }
         } else {
             System.out.println("Incorrect index");
