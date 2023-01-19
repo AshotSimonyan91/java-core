@@ -38,9 +38,12 @@ public class DynamicArray {
     }
 
     public int get(int index) {
-        if (index >= array.length) {
+        if (index >= array.length || index < 0) {
             System.out.println("Incorrect index");
             return -1;
+        }
+        if (index >= arrayIndex) {
+            System.out.println("Did not add elements");
         }
         return array[index];
     }
