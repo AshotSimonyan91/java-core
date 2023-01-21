@@ -71,4 +71,47 @@ public class DynamicArray {
 
     }
 
+    public void set(int index, int value) {
+        if (index < 0 && index > arrayIndex) {
+            System.out.println("Incorrect index");
+        } else {
+            array[index] = value;
+        }
+    }
+
+    public void add(int index, int value) {
+        if (index < 0 && index > arrayIndex) {
+            System.out.println("Incorrect index");
+        } else {
+            int buf = 0;
+            int temp = array[index];
+            array[index] = value;
+            for (int i = index; i < arrayIndex; i++) {
+                if (arrayIndex == array.length) extend();
+                buf = array[i + 1];
+                array[i + 1] = temp;
+                temp = buf;
+            }
+            arrayIndex++;
+        }
+    }
+
+    public boolean exists(int value) {
+        for (int i = 0; i < arrayIndex; i++) {
+            if (array[i] == value) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public int getIndexByValue(int value) {
+        for (int i = 0; i < arrayIndex; i++) {
+            if (array[i] == value) {
+                return i;
+            }
+        }
+        System.out.println("Didn't have value");
+        return -1;
+    }
 }
