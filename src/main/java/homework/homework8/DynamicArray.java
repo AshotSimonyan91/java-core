@@ -51,20 +51,14 @@ public class DynamicArray {
     public void delete(int index) {
         if (arrayIndex != 0){
             if (index >= 0 && index <= arrayIndex) {
-                int j = 0;
-                int[] arrayTwo = new int[array.length - 1];
-                for (int i = 0; i < array.length; i++) {
-                    if (index != i) {
-                        arrayTwo[j] = array[i];
-                        j++;
-                    }
+                for (int i = index; i < array.length - 1; i++) {
+                    array[i] = array[i + 1];
                 }
-                array = arrayTwo;
                 arrayIndex--;
                 return;
             }
             System.out.println("Incorrect index");
-            System.out.println("Enter index from 0 until " + (array.length - 1));
+            System.out.println("Enter index from 0 until " + (arrayIndex - 1));
         }
     }
 
@@ -98,6 +92,7 @@ public class DynamicArray {
         for (int i = 0; i < arrayIndex; i++) {
             if (array[i] == value) {
                 val = true;
+                break;
             }
         }
         return val;
