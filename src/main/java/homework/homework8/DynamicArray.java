@@ -49,10 +49,8 @@ public class DynamicArray {
     }
 
     public void delete(int index) {
-        if (index >= 0 && index < arrayIndex) {
-            if (arrayIndex == 0) {
-                System.out.println("Array is empty");
-            } else {
+        if (arrayIndex != 0){
+            if (index >= 0 && index <= arrayIndex) {
                 int j = 0;
                 int[] arrayTwo = new int[array.length - 1];
                 for (int i = 0; i < array.length; i++) {
@@ -63,12 +61,11 @@ public class DynamicArray {
                 }
                 array = arrayTwo;
                 arrayIndex--;
+                return;
             }
-        } else {
             System.out.println("Incorrect index");
             System.out.println("Enter index from 0 until " + (array.length - 1));
         }
-
     }
 
     public void set(int index, int value) {
@@ -80,9 +77,7 @@ public class DynamicArray {
     }
 
     public void add(int index, int value) {
-        if (index < 0 && index > arrayIndex) {
-            System.out.println("Incorrect index");
-        } else {
+        if (index >= 0 || index < arrayIndex) {
             int buf = 0;
             int temp = array[index];
             array[index] = value;
@@ -93,7 +88,9 @@ public class DynamicArray {
                 temp = buf;
             }
             arrayIndex++;
+            return;
         }
+        System.out.println("Incorrect index");
     }
 
     public boolean exists(int value) {

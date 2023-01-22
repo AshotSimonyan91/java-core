@@ -16,13 +16,13 @@ public class DynamicArrayDemo {
 //        dynamicArray.print();
 
 //        System.out.println(dynamicArray.get(12));
-//        dynamicArray.delete(4);
+        dynamicArray.delete(33);
 
 //        dynamicArray.add(3,9);
 //        dynamicArray.delete(3);
 
-        System.out.println(dynamicArray.exists(33));
-        System.out.println(dynamicArray.getIndexByValue(6));
+//        System.out.println(dynamicArray.exists(33));
+//        System.out.println(dynamicArray.getIndexByValue(6));
 
 
         dynamicArray.print();
