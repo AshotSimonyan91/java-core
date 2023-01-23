@@ -1,4 +1,4 @@
-package chapter6;
+package chapter6.Stack;
 
 public class Stack {
     int[] stck = new int[10];

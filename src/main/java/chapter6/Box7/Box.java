@@ -1,7 +1,6 @@
-package chapter6;
+package chapter6.Box7;
 
 public class Box {
-
     double width;
     double height;
     double depth;
