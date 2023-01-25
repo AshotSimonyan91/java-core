@@ -49,7 +49,7 @@ public class DynamicArray {
     }
 
     public void delete(int index) {
-        if (arrayIndex != 0){
+        if (arrayIndex != 0) {
             if (index >= 0 && index <= arrayIndex) {
                 for (int i = index; i < array.length - 1; i++) {
                     array[i] = array[i + 1];
@@ -63,24 +63,20 @@ public class DynamicArray {
     }
 
     public void set(int index, int value) {
-        if (index < 0 && index > arrayIndex) {
+        if (index < 0 || index > arrayIndex) {
             System.out.println("Incorrect index");
-        } else {
-            array[index] = value;
+            return;
         }
+        array[index] = value;
     }
 
     public void add(int index, int value) {
         if (index >= 0 || index < arrayIndex) {
-            int buf = 0;
-            int temp = array[index];
-            array[index] = value;
-            for (int i = index; i < arrayIndex; i++) {
-                if (arrayIndex == array.length) extend();
-                buf = array[i + 1];
-                array[i + 1] = temp;
-                temp = buf;
+            if (arrayIndex == array.length) extend();
+            for (int i = arrayIndex; i >= index; i--) {
+                array[i] = array[i - 1];
             }
+            array[index] = value;
             arrayIndex++;
             return;
         }
