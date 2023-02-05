@@ -3,6 +3,7 @@ package homework.homework9;
 public class BraceChecker {
 
     private String text;
+    private Stack stack = new Stack();
 
     public BraceChecker(String text) {
         this.text = text;
@@ -12,8 +13,6 @@ public class BraceChecker {
         int trueChecker = 0;
         int pushCounter = 0;
         int[] arrayPushIndex = new int[text.length()];
-        Stack stack = new Stack();
-
         for (int i = 0; i < text.length(); i++) {
             switch (text.charAt(i)) {
                 case '(', '[', '{':
