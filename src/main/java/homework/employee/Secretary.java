@@ -1,5 +1,6 @@
 package homework.employee;
 
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class Secretary {
@@ -80,11 +81,11 @@ public class Secretary {
     private void searchEmployeeByCompany(){
         System.out.println("\u001B[33m" + "Please input employee company for search" + "\u001B[0m");
         String str = scanner.nextLine();
-        Employee employee = employeeStorage.searchEmployeeByCompany(str);
+        Employee[] employee = employeeStorage.searchEmployeeByCompany(str);
         if (employee == null){
             System.err.println("No employee with " + str + " company");
             return;
         }
-        System.out.println("\u001B[34m" + employee + "\u001B[0m");
+        System.out.println("\u001B[34m" + Arrays.toString(employee) + "\u001B[0m");
     }
 }

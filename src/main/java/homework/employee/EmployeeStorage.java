@@ -47,14 +47,17 @@ public class EmployeeStorage {
         return null;
     }
 
-    public Employee searchEmployeeByCompany(String value) {
+    public Employee[] searchEmployeeByCompany(String value) {
+        Employee[] arrayEmployee = new Employee[arrayIndex];
+        int arrayEmployeeIndex = 0;
         for (int i = 0; i < arrayIndex; i++) {
             Employee employee = array[i];
             if (employee.getCompany().toLowerCase().contains(value.toLowerCase())) {
-                return employee;
+//                return employee;
+                arrayEmployee[arrayEmployeeIndex++] = employee;
             }
         }
-        return null;
+        return arrayEmployee;
     }
 
     public boolean checkID(String id) {
