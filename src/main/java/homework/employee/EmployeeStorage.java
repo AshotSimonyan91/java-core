@@ -32,40 +32,36 @@ public class EmployeeStorage {
 
     public void print() {
         for (int i = 0; i < arrayIndex; i++) {
-            System.err.println("\u001B[34m" + array[i] + "\u001B[0m");
+            System.out.println("\u001B[34m" + array[i] + "\u001B[0m");
         }
+        if(arrayIndex == 0) System.err.println("Didn't add any employee");
     }
 
-    public void searchEmployeeByEmployeeID(String value) {
-        boolean found = false;
+    public Employee searchEmployeeByEmployeeID(String value) {
         for (int i = 0; i < arrayIndex; i++) {
             Employee employee = array[i];
-            if (employee.getEmployID().toLowerCase().contains(value.toLowerCase())) {
-                System.out.println("\u001B[34m" + employee + "\u001B[0m");
-                found = true;
+            if (employee.getID().toLowerCase().contains(value.toLowerCase())) {
+                return employee;
             }
         }
-        if (!found) System.err.println("No employee with ID" + value);
+        return null;
     }
 
-    public void searchEmployeeByCompany(String value) {
-        boolean found = false;
+    public Employee searchEmployeeByCompany(String value) {
         for (int i = 0; i < arrayIndex; i++) {
             Employee employee = array[i];
             if (employee.getCompany().toLowerCase().contains(value.toLowerCase())) {
-                System.out.println("\u001B[34m" + employee + "\u001B[0m");
-                found = true;
+                return employee;
             }
         }
-        if (!found) System.err.println("No employee with " + value + "company");
-
+        return null;
     }
 
     public boolean checkID(String id) {
         for (int i = 0; i < arrayIndex; i++) {
             Employee employee = array[i];
-            if (employee.getEmployID().equals(id)) {
-                System.err.println("Employee with " + id + "ID already exists");
+            if (employee.getID().equals(id)) {
+                System.err.println("Employee with \"" + id + "\" ID already exists");
                 return false;
             }
         }
