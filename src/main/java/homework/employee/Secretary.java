@@ -5,8 +5,13 @@ import java.util.Scanner;
 
 public class Secretary {
     private boolean isTrue = true;
-    private Scanner scanner = new Scanner(System.in);
-    private EmployeeStorage employeeStorage = new EmployeeStorage();
+    private final Scanner scanner;
+    private final EmployeeStorage employeeStorage;
+
+    public Secretary(Scanner scanner, EmployeeStorage employeeStorage) {
+        this.scanner = scanner;
+        this.employeeStorage = employeeStorage;
+    }
 
     public void working() {
         while (isTrue) {
