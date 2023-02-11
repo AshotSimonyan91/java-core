@@ -34,10 +34,23 @@ public class EmployeeStorage {
         for (int i = 0; i < arrayIndex; i++) {
             System.out.println("\u001B[34m" + array[i] + "\u001B[0m");
         }
-        if(arrayIndex == 0) System.err.println("Didn't add any employee");
+        if (arrayIndex == 0) System.err.println("Didn't add any employee");
     }
 
-    public Employee searchEmployeeByEmployeeID(String value) {
+    public Employee[] getAllActiveEmployee() {
+        Employee[] arrayEmployee = new Employee[arrayIndex];
+        int arrayEmployeeIndex = 0;
+        for (int i = 0; i < arrayIndex; i++) {
+            Employee employee = array[i];
+            if (employee.isActive()) {
+                arrayEmployee[arrayEmployeeIndex++] = employee;
+            }
+        }
+        if (arrayEmployeeIndex == 0) return null;
+        return arrayEmployee;
+    }
+
+    public Employee getEmployeeByEmployeeID(String value) {
         for (int i = 0; i < arrayIndex; i++) {
             Employee employee = array[i];
             if (employee.getID().toLowerCase().contains(value.toLowerCase())) {
@@ -47,16 +60,16 @@ public class EmployeeStorage {
         return null;
     }
 
-    public Employee[] searchEmployeeByCompany(String value) {
+    public Employee[] getEmployeeByCompany(String value) {
         Employee[] arrayEmployee = new Employee[arrayIndex];
         int arrayEmployeeIndex = 0;
         for (int i = 0; i < arrayIndex; i++) {
             Employee employee = array[i];
             if (employee.getCompany().toLowerCase().contains(value.toLowerCase())) {
-//                return employee;
                 arrayEmployee[arrayEmployeeIndex++] = employee;
             }
         }
+        if (arrayEmployeeIndex == 0) return null;
         return arrayEmployee;
     }
 
@@ -69,5 +82,18 @@ public class EmployeeStorage {
             }
         }
         return true;
+    }
+
+    public Employee[] getEmployeeBySalaryRange(double min, double max) {
+        Employee[] arrayEmployee = new Employee[arrayIndex];
+        int arrayEmployeeIndex = 0;
+        for (int i = 0; i < arrayIndex; i++) {
+            Employee employee = array[i];
+            if (employee.getSalary() >= min && employee.getSalary() <= max) {
+                arrayEmployee[arrayEmployeeIndex++] = employee;
+            }
+        }
+        if (arrayEmployeeIndex == 0) return null;
+        return arrayEmployee;
     }
 }

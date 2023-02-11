@@ -9,6 +9,7 @@ public class Employee {
     private double salary;
     private String company;
     private String position;
+    private boolean active;
 
     public Employee() {
         name = "";
@@ -26,6 +27,14 @@ public class Employee {
         this.salary = salary;
         this.company = company;
         this.position = position;
+    }
+
+    public boolean isActive() {
+        return active;
+    }
+
+    public void setActive(boolean active) {
+        this.active = active;
     }
 
     public String getName() {
@@ -84,6 +93,7 @@ public class Employee {
         Employee employee = (Employee) o;
 
         if (Double.compare(employee.salary, salary) != 0) return false;
+        if (active != employee.active) return false;
         if (!Objects.equals(name, employee.name)) return false;
         if (!Objects.equals(surname, employee.surname)) return false;
         if (!Objects.equals(ID, employee.ID)) return false;
@@ -102,6 +112,7 @@ public class Employee {
         result = 31 * result + (int) (temp ^ (temp >>> 32));
         result = 31 * result + (company != null ? company.hashCode() : 0);
         result = 31 * result + (position != null ? position.hashCode() : 0);
+        result = 31 * result + (active ? 1 : 0);
         return result;
     }
 
@@ -110,23 +121,11 @@ public class Employee {
         return "Employee{" +
                 "name='" + name + '\'' +
                 ", surname='" + surname + '\'' +
-                ", employID='" + ID + '\'' +
+                ", ID='" + ID + '\'' +
                 ", salary=" + salary +
                 ", company='" + company + '\'' +
                 ", position='" + position + '\'' +
+                ", active=" + active +
                 '}';
-    }
-
-    public boolean isSalaryDigit(String value) {
-        int counter = 0;
-        if (value.length() == 0) counter++;
-        for (int i = 0; i < value.length(); i++) {
-            char c = value.charAt(i);
-            if (!Character.isDigit(c)) {
-                counter++;
-            }
-        }
-        if (counter > 0) return false;
-        return true;
     }
 }
