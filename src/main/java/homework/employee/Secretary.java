@@ -1,14 +1,19 @@
 package homework.employee;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.Scanner;
 
 public class Secretary {
     private boolean isTrue = true;
     private final Scanner scanner;
     private final EmployeeStorage employeeStorage;
+    SimpleDateFormat simpleDateFormat;
 
-    public Secretary(Scanner scanner, EmployeeStorage employeeStorage) {
+    public Secretary(Scanner scanner, EmployeeStorage employeeStorage,SimpleDateFormat simpleDateFormat) {
+        this.simpleDateFormat = simpleDateFormat;
         this.scanner = scanner;
         this.employeeStorage = employeeStorage;
     }
@@ -150,6 +155,15 @@ public class Secretary {
 
         System.out.println("\u001B[33m" + "Please input employee position: " + "\u001B[0m");
         employee.setPosition(scanner.nextLine());
+
+        System.out.println("\u001B[33m" + "Please input employee birthday date (example: DD/MM/YYYY): " + "\u001B[0m");
+        try {
+            employee.setDateOfBirthday(simpleDateFormat.parse(scanner.nextLine()));
+        } catch (ParseException e) {
+            System.out.println("Wrong date format " + e);
+        }
+
+        employee.setRegisterDate(new Date());
 
         employee.setActive(true);
 

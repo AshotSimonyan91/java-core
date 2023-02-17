@@ -1,5 +1,6 @@
 package homework.employee;
 
+import java.util.Date;
 import java.util.Objects;
 
 public class Employee {
@@ -10,6 +11,8 @@ public class Employee {
     private String company;
     private String position;
     private boolean active;
+    private Date registerDate;
+    private Date dateOfBirthday;
 
     public Employee() {
         name = "";
@@ -20,13 +23,32 @@ public class Employee {
         position = "";
     }
 
-    public Employee(String name, String surname, String ID, double salary, String company, String position) {
+    public Employee(String name, String surname, String ID, double salary, String company, String position, boolean active, Date registerDate, Date dateOfBirthday) {
         this.name = name;
         this.surname = surname;
         this.ID = ID;
         this.salary = salary;
         this.company = company;
         this.position = position;
+        this.active = active;
+        this.registerDate = registerDate;
+        this.dateOfBirthday = dateOfBirthday;
+    }
+
+    public Date getRegisterDate() {
+        return registerDate;
+    }
+
+    public void setRegisterDate(Date registerDate) {
+        this.registerDate = registerDate;
+    }
+
+    public Date getDateOfBirthday() {
+        return dateOfBirthday;
+    }
+
+    public void setDateOfBirthday(Date dateOfBirthday) {
+        this.dateOfBirthday = dateOfBirthday;
     }
 
     public boolean isActive() {
@@ -98,7 +120,10 @@ public class Employee {
         if (!Objects.equals(surname, employee.surname)) return false;
         if (!Objects.equals(ID, employee.ID)) return false;
         if (!Objects.equals(company, employee.company)) return false;
-        return Objects.equals(position, employee.position);
+        if (!Objects.equals(position, employee.position)) return false;
+        if (!Objects.equals(registerDate, employee.registerDate))
+            return false;
+        return Objects.equals(dateOfBirthday, employee.dateOfBirthday);
     }
 
     @Override
@@ -113,19 +138,23 @@ public class Employee {
         result = 31 * result + (company != null ? company.hashCode() : 0);
         result = 31 * result + (position != null ? position.hashCode() : 0);
         result = 31 * result + (active ? 1 : 0);
+        result = 31 * result + (registerDate != null ? registerDate.hashCode() : 0);
+        result = 31 * result + (dateOfBirthday != null ? dateOfBirthday.hashCode() : 0);
         return result;
     }
 
     @Override
     public String toString() {
         return "Employee{" +
-                "name='" + name + '\'' +
-                ", surname='" + surname + '\'' +
-                ", ID='" + ID + '\'' +
-                ", salary=" + salary +
-                ", company='" + company + '\'' +
-                ", position='" + position + '\'' +
-                ", active=" + active +
+                "name = '" + name + '\'' +
+                ", surname = '" + surname + '\'' +
+                ", ID = '" + ID + '\'' +
+                ", salary = " + salary +
+                ", company = '" + company + '\'' +
+                ", position = '" + position + '\'' +
+                ", active = " + active +
+                ", registerDate = " + registerDate +
+                ", dateOfBirthday = " + dateOfBirthday +
                 '}';
     }
 }
