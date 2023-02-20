@@ -1,4 +1,6 @@
-package homework.employee;
+package homework.employee.model;
+
+import homework.employee.util.DateUtil;
 
 import java.util.Date;
 import java.util.Objects;
@@ -8,7 +10,7 @@ public class Employee {
     private String surname;
     private String ID;
     private double salary;
-    private String company;
+    private Company company;
     private String position;
     private boolean active;
     private Date registerDate;
@@ -19,11 +21,10 @@ public class Employee {
         surname = "";
         ID = "";
         salary = 0.0;
-        company = "";
         position = "";
     }
 
-    public Employee(String name, String surname, String ID, double salary, String company, String position, boolean active, Date registerDate, Date dateOfBirthday) {
+    public Employee(String name, String surname, String ID, double salary, Company company, String position, boolean active, Date registerDate, Date dateOfBirthday) {
         this.name = name;
         this.surname = surname;
         this.ID = ID;
@@ -91,13 +92,14 @@ public class Employee {
         this.salary = salary;
     }
 
-    public String getCompany() {
+    public Company getCompany() {
         return company;
     }
 
-    public void setCompany(String company) {
+    public void setCompany(Company company) {
         this.company = company;
     }
+
 
     public String getPosition() {
         return position;
@@ -106,7 +108,6 @@ public class Employee {
     public void setPosition(String position) {
         this.position = position;
     }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -146,15 +147,15 @@ public class Employee {
     @Override
     public String toString() {
         return "Employee{" +
-                "name = '" + name + '\'' +
-                ", surname = '" + surname + '\'' +
-                ", ID = '" + ID + '\'' +
-                ", salary = " + salary +
-                ", company = '" + company + '\'' +
-                ", position = '" + position + '\'' +
-                ", active = " + active +
-                ", registerDate = " + registerDate +
-                ", dateOfBirthday = " + dateOfBirthday +
+                "name='" + name + '\'' +
+                ", surname='" + surname + '\'' +
+                ", ID='" + ID + '\'' +
+                ", salary=" + salary +
+                ", company=" + company +
+                ", position='" + position + '\'' +
+                ", active=" + active +
+                ", registerDate=" + DateUtil.dateToString(registerDate) +
+                ", dateOfBirthday=" + DateUtil.dateToString(dateOfBirthday) +
                 '}';
     }
 }

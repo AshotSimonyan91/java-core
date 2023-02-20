@@ -1,10 +1,12 @@
-package homework.employee;
+package homework.employee.storage;
+
+import homework.employee.model.Employee;
 
 public class EmployeeStorage {
     private Employee[] array;
     private int arrayIndex;
 
-    EmployeeStorage() {
+    public EmployeeStorage() {
         arrayIndex = 0;
         array = new Employee[10];
     }
@@ -16,9 +18,7 @@ public class EmployeeStorage {
 
     private void extend() {
         Employee[] arrayOne = new Employee[array.length + 10];
-        for (int i = 0; i < array.length; i++) {
-            arrayOne[i] = array[i];
-        }
+        System.arraycopy(array, 0, arrayOne, 0, array.length);
         array = arrayOne;
     }
 
@@ -49,6 +49,18 @@ public class EmployeeStorage {
         if (arrayEmployeeIndex == 0) return null;
         return arrayEmployee;
     }
+    public Employee[] getAllInactiveEmployee() {
+        Employee[] arrayEmployee = new Employee[arrayIndex];
+        int arrayEmployeeIndex = 0;
+        for (int i = 0; i < arrayIndex; i++) {
+            Employee employee = array[i];
+            if (!employee.isActive()) {
+                arrayEmployee[arrayEmployeeIndex++] = employee;
+            }
+        }
+        if (arrayEmployeeIndex == 0) return null;
+        return arrayEmployee;
+    }
 
     public Employee getEmployeeByEmployeeID(String value) {
         for (int i = 0; i < arrayIndex; i++) {
@@ -60,12 +72,12 @@ public class EmployeeStorage {
         return null;
     }
 
-    public Employee[] getEmployeeByCompany(String value) {
+    public Employee[] getEmployeeByCompanyName(String value) {
         Employee[] arrayEmployee = new Employee[arrayIndex];
         int arrayEmployeeIndex = 0;
         for (int i = 0; i < arrayIndex; i++) {
             Employee employee = array[i];
-            if (employee.getCompany().toLowerCase().contains(value.toLowerCase())) {
+            if (employee.getCompany().getName().toLowerCase().contains(value.toLowerCase())) {
                 arrayEmployee[arrayEmployeeIndex++] = employee;
             }
         }

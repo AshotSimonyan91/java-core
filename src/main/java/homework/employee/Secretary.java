@@ -1,52 +1,70 @@
 package homework.employee;
 
+import homework.employee.model.Company;
+import homework.employee.model.Employee;
+import homework.employee.storage.CompanyStorage;
+import homework.employee.storage.EmployeeStorage;
+import homework.employee.util.DateUtil;
+
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.Scanner;
 
-public class Secretary {
+public class Secretary implements Commands {
     private boolean isTrue = true;
     private final Scanner scanner;
     private final EmployeeStorage employeeStorage;
-    SimpleDateFormat simpleDateFormat;
+    private final CompanyStorage companyStorage;
 
-    public Secretary(Scanner scanner, EmployeeStorage employeeStorage,SimpleDateFormat simpleDateFormat) {
-        this.simpleDateFormat = simpleDateFormat;
+    public Secretary(Scanner scanner, EmployeeStorage employeeStorage, CompanyStorage companyStorage) {
+        this.companyStorage = companyStorage;
         this.scanner = scanner;
         this.employeeStorage = employeeStorage;
     }
 
     public void working() {
         while (isTrue) {
-            System.out.println("Please input 0 for exit");
-            System.out.println("Please input 1 for add employee");
-            System.out.println("Please input 2 for print all employee");
-            System.out.println("Please input 3 for search employee by employee ID");
-            System.out.println("Please input 4 for search employee by company name");
-            System.out.println("Please input 5 for search employee by salary range");
-            System.out.println("Please input 6 for change employee position by id");
-            System.out.println("Please input 7 for print only active employees");
-            System.out.println("Please input 8 for inactive employee by id ");
-            System.out.println("Please input 9 for activate employee by id");
+            printCommands();
             switch (scanner.nextLine()) {
-                case "0" -> isTrue = false;
-                case "1" -> addEmployee();
-                case "2" -> employeeStorage.print();
-                case "3" -> searchEmployeeByID();
-                case "4" -> searchEmployeeByCompany();
-                case "5" -> searchEmployeeBySalaryRange();
-                case "6" -> changeEmployeePositionByID();
-                case "7" -> printAllActiveEmployees();
-                case "8" -> inactiveEmployeeByID();
-                case "9" -> activateEmployeeByID();
-
+                case EXIT -> isTrue = false;
+                case ADD_EMPLOYEE -> addEmployee();
+                case ADD_COMPANY -> addCompany();
+                case PRINT_EMPLOYEE -> employeeStorage.print();
+                case SEARCH_EMPLOYEE_BY_ID -> searchEmployeeByID();
+                case SEARCH_EMPLOYEE_BY_COMPANY_ID -> searchEmployeeByCompanyID();
+                case SEARCH_EMPLOYEE_BY_SALARY_RANGE -> searchEmployeeBySalaryRange();
+                case CHANGE_EMPLOYEE_POSITION_BY_ID -> changeEmployeePositionByID();
+                case PRINT_ALL_ACTIVE_EMPLOYEES -> printAllActiveEmployees();
+                case INACTIVATE_EMPLOYEE_BY_ID -> inactivateEmployeeByID();
+                case ACTIVATE_EMPLOYEE_BY_ID -> activateEmployeeByID();
+                case PRINT_ALL_COMPANIES -> companyStorage.print();
             }
         }
     }
 
+    private void addCompany() {
+        System.out.println("\u001B[33m" + "Please input company ID : " + "\u001B[0m");
+        String idStr = scanner.nextLine();
+        if (companyStorage.getCompanyByID(idStr) == null) {
+            Company company = new Company();
+            company.setId(idStr);
+            System.out.println("\u001B[33m" + "Please input company name : " + "\u001B[0m");
+            company.setName(scanner.nextLine());
+            System.out.println("\u001B[33m" + "Please input company address : " + "\u001B[0m");
+            company.setAddress(scanner.nextLine());
+            System.out.println("\u001B[33m" + "Please input company phone number : " + "\u001B[0m");
+            company.setPhoneNumber(scanner.nextLine());
+            companyStorage.add(company);
+            System.err.println("Company was added");
+        } else {
+            System.err.println("Company with " + idStr + " already exist");
+        }
+
+    }
+
     private void activateEmployeeByID() {
+        System.out.println(Arrays.toString(employeeStorage.getAllInactiveEmployee()));
         System.out.println("\u001B[33m" + "Please input  ID for search employee" + "\u001B[0m");
         String str = scanner.nextLine();
         Employee employee = employeeStorage.getEmployeeByEmployeeID(str);
@@ -62,7 +80,8 @@ public class Secretary {
         System.err.println("Employee active");
     }
 
-    private void inactiveEmployeeByID() {
+    private void inactivateEmployeeByID() {
+        System.out.println(Arrays.toString(employeeStorage.getAllActiveEmployee()));
         System.out.println("\u001B[33m" + "Please input  ID for search employee" + "\u001B[0m");
         String str = scanner.nextLine();
         Employee employee = employeeStorage.getEmployeeByEmployeeID(str);
@@ -150,15 +169,17 @@ public class Secretary {
             System.err.println("Please input only numbers");
         }
 
-        System.out.println("\u001B[33m" + "Please input employee company: " + "\u001B[0m");
-        employee.setCompany(scanner.nextLine());
+        companyStorage.print();
+        System.out.println("\u001B[33m" + "Please input employee company by company ID: " + "\u001B[0m");
+        employee.setCompany(companyStorage.getCompanyByID(scanner.nextLine()));
+        employee.getCompany().setEmployeeCount(employee.getCompany().getEmployeeCount() + 1);
 
         System.out.println("\u001B[33m" + "Please input employee position: " + "\u001B[0m");
         employee.setPosition(scanner.nextLine());
 
         System.out.println("\u001B[33m" + "Please input employee birthday date (example: DD/MM/YYYY): " + "\u001B[0m");
         try {
-            employee.setDateOfBirthday(simpleDateFormat.parse(scanner.nextLine()));
+            employee.setDateOfBirthday(DateUtil.stringToDate(scanner.nextLine()));
         } catch (ParseException e) {
             System.out.println("Wrong date format " + e);
         }
@@ -182,10 +203,11 @@ public class Secretary {
         System.out.println("\u001B[34m" + employee + "\u001B[0m");
     }
 
-    private void searchEmployeeByCompany() {
+    private void searchEmployeeByCompanyID() {
+        companyStorage.print();
         System.out.println("\u001B[33m" + "Please input employee company for search" + "\u001B[0m");
         String str = scanner.nextLine();
-        Employee[] employee = employeeStorage.getEmployeeByCompany(str);
+        Employee[] employee = employeeStorage.getEmployeeByCompanyName(str);
         if (employee == null) {
             System.err.println("No employee with " + str + " company");
             return;
