@@ -116,7 +116,8 @@ public class MedicalAdministrator implements Commands {
                     return;
                 }
             }
-            medicalStorage.registerPatientAtDoctor(idStr, DateUtil.stringToDate(dateStr));
+            Doctor doctorByDoctorID = medicalStorage.getDoctorByDoctorID(idStr);
+            doctorByDoctorID.setPatientDateAndTime(DateUtil.stringToDate(dateStr));
             patient.setDoctor(medicalStorage.getDoctorByDoctorID(idStr));
             patient.setRegisterDate(DateUtil.stringToDate(dateStr));
         } catch (ParseException e) {

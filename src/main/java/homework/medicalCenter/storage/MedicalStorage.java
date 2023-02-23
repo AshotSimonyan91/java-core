@@ -4,18 +4,22 @@ import homework.medicalCenter.model.Doctor;
 import homework.medicalCenter.model.Patient;
 import homework.medicalCenter.parent.Person;
 
-import java.util.Date;
-
 public class MedicalStorage {
     private Person[] array;
     private int arrayIndex;
+    private int doctorCount;
+    private int patientCount;
 
     public MedicalStorage() {
+        doctorCount = 0;
+        patientCount = 0;
         arrayIndex = 0;
         array = new Person[10];
     }
 
     MedicalStorage(int size) {
+        doctorCount = 0;
+        patientCount = 0;
         arrayIndex = 0;
         array = new Person[size];
     }
@@ -37,16 +41,12 @@ public class MedicalStorage {
             }
         }
         array[arrayIndex] = person;
-        arrayIndex++;
-    }
-
-    public void registerPatientAtDoctor(String id, Date date) {
-        try {
-            Doctor doctorByDoctorID = getDoctorByDoctorID(id);
-            doctorByDoctorID.setPatientDateAndTime(date);
-        } catch (NullPointerException e) {
-            System.out.println("doctor with " + '\'' + id + '\'' + " not exist");
+        if (person.getStatus().equals("doctor")) {
+            doctorCount++;
+        } else {
+            patientCount++;
         }
+        arrayIndex++;
     }
 
     public void deleteDoctorByID(String id) {
@@ -79,7 +79,7 @@ public class MedicalStorage {
     }
 
     public Doctor[] getAllDoctor() {
-        Doctor[] arrayDoctor = new Doctor[arrayIndex];
+        Doctor[] arrayDoctor = new Doctor[doctorCount];
         int arrayPersonIndex = 0;
         for (int i = 0; i < arrayIndex; i++) {
             Person doctor = array[i];
@@ -92,7 +92,7 @@ public class MedicalStorage {
     }
 
     public Patient[] getAllPatient() {
-        Patient[] arrayPatient = new Patient[arrayIndex];
+        Patient[] arrayPatient = new Patient[patientCount];
         int arrayPersonIndex = 0;
         for (int i = 0; i < arrayIndex; i++) {
             Person patient = array[i];
