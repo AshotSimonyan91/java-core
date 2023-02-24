@@ -54,12 +54,11 @@ public class MedicalAdministrator implements Commands {
     }
 
     private void printAllPatientByDoctor() {
-        try {
-            System.out.println(Arrays.toString(medicalStorage.getAllDoctor()));
-        } catch (NullPointerException e) {
+        if (medicalStorage.getAllDoctor().length == 0) {
             System.out.println("First add doctor");
             return;
         }
+        System.out.println(Arrays.toString(medicalStorage.getAllDoctor()));
         System.out.println("Please input doctor id");
         String doctorId = scanner.nextLine();
         Patient[] allPatient = medicalStorage.getAllPatient();
@@ -86,11 +85,7 @@ public class MedicalAdministrator implements Commands {
                 break;
             }
             System.err.println("Please try again");
-            try {
-                System.out.println(Arrays.toString(medicalStorage.getAllPatient()));
-            } catch (NullPointerException e) {
-                System.out.println("Patient's not exist");
-            }
+            System.out.println(Arrays.toString(medicalStorage.getAllPatient()));
         }
         System.out.println("Please input patient's name");
         patient.setName(scanner.nextLine());
@@ -98,12 +93,11 @@ public class MedicalAdministrator implements Commands {
         patient.setSurname(scanner.nextLine());
         System.out.println("Please input patient's phone number");
         patient.setPhoneNumber(scanner.nextLine());
-        try {
-            System.out.println(Arrays.toString(medicalStorage.getAllDoctor()));
-        } catch (NullPointerException e) {
-            System.err.println("Please at first add doctor");
+        if (medicalStorage.getAllDoctor().length == 0) {
+            System.out.println("First add doctor");
             return;
         }
+        System.out.println(Arrays.toString(medicalStorage.getAllDoctor()));
         System.out.println("Please input doctor by doctor ID");
         String idStr = scanner.nextLine();
         System.out.println("Please input date and time  (dd/MM/yyyy HH:mm:ss)");
@@ -135,51 +129,60 @@ public class MedicalAdministrator implements Commands {
     }
 
     private void changeDoctorDataByID() {
-        try {
-            System.out.println(Arrays.toString(medicalStorage.getAllDoctor()));
-            System.out.println("Please input doctor ID for change doctor data");
-            Doctor doctorByDoctorID = medicalStorage.getDoctorByDoctorID(scanner.nextLine());
-            System.out.println("Please input name");
-            doctorByDoctorID.setName(scanner.nextLine());
-            System.out.println("Please input surname");
-            doctorByDoctorID.setSurname(scanner.nextLine());
-            System.out.println("Please input phone number");
-            doctorByDoctorID.setPhoneNumber(scanner.nextLine());
-            System.out.println("Please input email");
-            doctorByDoctorID.setEmail(scanner.nextLine());
-            System.out.println("Please input profession");
-            doctorByDoctorID.setProfession(scanner.nextLine());
-
-            medicalStorage.add(doctorByDoctorID);
-        } catch (NullPointerException e) {
+        if (medicalStorage.getAllDoctor().length == 0) {
             System.out.println("First add doctor");
+            return;
         }
+        System.out.println(Arrays.toString(medicalStorage.getAllDoctor()));
+        System.out.println("Please input doctor ID for change doctor data");
+        Doctor doctorByDoctorID = medicalStorage.getDoctorByDoctorID(scanner.nextLine());
+        System.out.println("Please input name");
+        doctorByDoctorID.setName(scanner.nextLine());
+        System.out.println("Please input surname");
+        doctorByDoctorID.setSurname(scanner.nextLine());
+        System.out.println("Please input phone number");
+        doctorByDoctorID.setPhoneNumber(scanner.nextLine());
+        System.out.println("Please input email");
+        doctorByDoctorID.setEmail(scanner.nextLine());
+        System.out.println("Please input profession");
+        doctorByDoctorID.setProfession(scanner.nextLine());
+
+        medicalStorage.add(doctorByDoctorID);
     }
 
     private void deleteDoctorByID() {
-        try {
-            System.out.println(Arrays.toString(medicalStorage.getAllDoctor()));
-            System.out.println("Please input doctor ID for delete doctor");
-            medicalStorage.deleteDoctorByID(scanner.nextLine());
-        } catch (NullPointerException e) {
+        if (medicalStorage.getAllDoctor().length == 0) {
             System.out.println("First add doctor");
+            return;
         }
+        System.out.println(Arrays.toString(medicalStorage.getAllDoctor()));
+        System.out.println("Please input doctor ID for delete doctor");
+        String idStr = scanner.nextLine();
+        medicalStorage.deleteDoctorByID(idStr);
+        Patient[] allPatient = medicalStorage.getAllPatient();
+        for (int i = 0; i < allPatient.length; i++) {
+            if(allPatient[i].getDoctor().getId().equals(idStr)){
+                allPatient[i].setDoctor(new Doctor("","","","","","",0));
+                medicalStorage.add(allPatient[i]);
+            }
+        }
+
     }
 
     private void searchDoctorByProfession() {
-        try {
-            System.out.println(Arrays.toString(medicalStorage.getAllDoctor()));
-        } catch (NullPointerException e) {
-            System.err.println("First add doctor");
+        if (medicalStorage.getAllDoctor().length == 0 || medicalStorage.getAllDoctor()[0] == null) {
+            System.out.println("First add doctor");
             return;
         }
+        System.out.println(Arrays.toString(medicalStorage.getAllDoctor()));
         System.out.println("Please input profession for search doctor");
         String professionStr = scanner.nextLine();
-        try {
-            System.out.println(Arrays.toString(medicalStorage.getDoctorByProfession(professionStr)));
-        } catch (NullPointerException e) {
+        if (medicalStorage.getDoctorByProfession(professionStr)[0] == null) {
             System.out.println("Doctor whit " + professionStr + " profession not exist");
+            return;
         }
+        System.out.println(Arrays.toString(medicalStorage.getDoctorByProfession(professionStr)));
+
     }
 
     private void addDoctor() {

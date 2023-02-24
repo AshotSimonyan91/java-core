@@ -4,6 +4,8 @@ import homework.medicalCenter.model.Doctor;
 import homework.medicalCenter.model.Patient;
 import homework.medicalCenter.parent.Person;
 
+import java.util.Objects;
+
 public class MedicalStorage {
     private Person[] array;
     private int arrayIndex;
@@ -63,6 +65,7 @@ public class MedicalStorage {
                 array[i] = array[i + 1];
             }
             arrayIndex--;
+            System.err.println("Doctor deleted");
             return;
         }
         System.out.println("Doctor whit " + id + " not found");
@@ -87,7 +90,6 @@ public class MedicalStorage {
                 arrayDoctor[arrayPersonIndex++] = (Doctor) doctor;
             }
         }
-        if (arrayPersonIndex == 0) throw new NullPointerException();
         return arrayDoctor;
     }
 
@@ -100,20 +102,18 @@ public class MedicalStorage {
                 arrayPatient[arrayPersonIndex++] = (Patient) patient;
             }
         }
-        if (arrayPersonIndex == 0) throw new NullPointerException();
         return arrayPatient;
     }
 
     public Doctor[] getDoctorByProfession(String value) {
-        Doctor[] arrayDoctor = new Doctor[arrayIndex];
+        Doctor[] arrayDoctor = new Doctor[doctorCount];
+        Doctor[] allDoctor = getAllDoctor();
         int arrayPersonIndex = 0;
-        for (int i = 0; i < arrayIndex; i++) {
-            Doctor doctor = (Doctor) array[i];
-            if (doctor.getProfession().equals(value)) {
-                arrayDoctor[arrayPersonIndex++] = doctor;
+        for (int i = 0; i < allDoctor.length; i++) {
+            if (Objects.equals(allDoctor[i].getProfession(),value)) {
+                arrayDoctor[arrayPersonIndex++] = allDoctor[i];
             }
         }
-        if (arrayPersonIndex == 0) throw new NullPointerException();
         return arrayDoctor;
     }
 
