@@ -14,22 +14,20 @@ public class Doctor extends Person {
     private int patientDateAndTimeIndex;
 
     public Doctor() {
-        status = "doctor";
         patientDateAndTimeIndex = 0;
-        patientDateAndTime = new Date[10];
+        patientDateAndTime = new Date[0];
     }
 
     public Doctor(String id, String name, String surname, String phoneNumber, String email, String profession, int size) {
         super(id, name, surname, phoneNumber);
         patientDateAndTimeIndex = 0;
         this.patientDateAndTime = new Date[size];
-        this.status = "doctor";
         this.email = email;
         this.profession = profession;
     }
 
     private void extend() {
-        Date[] arrayOne = new Date[patientDateAndTime.length + 10];
+        Date[] arrayOne = new Date[patientDateAndTime.length + 1];
         System.arraycopy(patientDateAndTime, 0, arrayOne, 0, patientDateAndTime.length);
         patientDateAndTime = arrayOne;
     }
@@ -46,10 +44,6 @@ public class Doctor extends Person {
         this.patientDateAndTime[patientDateAndTimeIndex++] = patientDateAndTime;
     }
 
-    @Override
-    public String getStatus() {
-        return super.getStatus();
-    }
 
     @Override
     public String getId() {

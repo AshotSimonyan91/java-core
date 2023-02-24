@@ -13,20 +13,14 @@ public class Patient extends Person {
 
 
     public Patient() {
-        status = "patient";
     }
 
     public Patient(String id, String name, String surname, String phoneNumber, Doctor doctor, Date registerDate) {
         super(id, name, surname, phoneNumber);
-        this.status = "patient";
         this.doctor = doctor;
         this.registerDate = registerDate;
     }
 
-    @Override
-    public String getStatus() {
-        return super.getStatus();
-    }
 
     @Override
     public String getId() {

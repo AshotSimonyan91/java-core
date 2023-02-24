@@ -102,8 +102,12 @@ public class MedicalAdministrator implements Commands {
         String idStr = scanner.nextLine();
         System.out.println("Please input date and time  (dd/MM/yyyy HH:mm:ss)");
         String dateStr = scanner.nextLine();
+        if (medicalStorage.getDoctorByDoctorID(idStr) == null) {
+            System.out.println("doctor with " + '\'' + idStr + '\'' + " not exist");
+            return;
+        }
+        Date[] patientDateAndTime = medicalStorage.getDoctorByDoctorID(idStr).getPatientDateAndTime();
         try {
-            Date[] patientDateAndTime = medicalStorage.getDoctorByDoctorID(idStr).getPatientDateAndTime();
             for (int i = 0; i < patientDateAndTime.length; i++) {
                 if (DateUtil.stringToDate(dateStr).equals(patientDateAndTime[i])) {
                     System.out.println("doctor busy in that time");
@@ -116,9 +120,6 @@ public class MedicalAdministrator implements Commands {
             patient.setRegisterDate(DateUtil.stringToDate(dateStr));
         } catch (ParseException e) {
             System.out.println("Incorrect date format");
-            return;
-        } catch (NullPointerException e) {
-            System.out.println("doctor with " + '\'' + idStr + '\'' + " not exist");
             return;
         }
 
@@ -161,8 +162,8 @@ public class MedicalAdministrator implements Commands {
         medicalStorage.deleteDoctorByID(idStr);
         Patient[] allPatient = medicalStorage.getAllPatient();
         for (int i = 0; i < allPatient.length; i++) {
-            if(allPatient[i].getDoctor().getId().equals(idStr)){
-                allPatient[i].setDoctor(new Doctor("","","","","","",0));
+            if (allPatient[i].getDoctor().getId().equals(idStr)) {
+                allPatient[i].setDoctor(new Doctor("", "", "", "", "", "", 0));
                 medicalStorage.add(allPatient[i]);
             }
         }
@@ -209,6 +210,7 @@ public class MedicalAdministrator implements Commands {
         doctor.setEmail(scanner.nextLine());
         System.out.println("Please input doctor's profession");
         doctor.setProfession(scanner.nextLine());
+
 
         medicalStorage.add(doctor);
 

@@ -43,7 +43,7 @@ public class MedicalStorage {
             }
         }
         array[arrayIndex] = person;
-        if (person.getStatus().equals("doctor")) {
+        if (person instanceof Doctor) {
             doctorCount++;
         } else {
             patientCount++;
@@ -78,7 +78,7 @@ public class MedicalStorage {
                 return doctor;
             }
         }
-        throw new NullPointerException();
+        return null;
     }
 
     public Doctor[] getAllDoctor() {
@@ -86,7 +86,7 @@ public class MedicalStorage {
         int arrayPersonIndex = 0;
         for (int i = 0; i < arrayIndex; i++) {
             Person doctor = array[i];
-            if (doctor.getStatus().equals("doctor")) {
+            if (doctor instanceof Doctor) {
                 arrayDoctor[arrayPersonIndex++] = (Doctor) doctor;
             }
         }
@@ -98,7 +98,7 @@ public class MedicalStorage {
         int arrayPersonIndex = 0;
         for (int i = 0; i < arrayIndex; i++) {
             Person patient = array[i];
-            if (patient.getStatus().equals("patient")) {
+            if (patient instanceof Patient) {
                 arrayPatient[arrayPersonIndex++] = (Patient) patient;
             }
         }

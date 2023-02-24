@@ -4,7 +4,6 @@ import java.util.Objects;
 
 public abstract class Person {
 
-    protected String status;
 
     protected String id;
     protected String name;
@@ -21,9 +20,6 @@ public abstract class Person {
         this.phoneNumber = phoneNumber;
     }
 
-    public String getStatus() {
-        return status;
-    }
 
     public String getId() {
         return id;
