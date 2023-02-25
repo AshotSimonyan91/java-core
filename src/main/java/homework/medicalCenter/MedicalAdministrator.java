@@ -39,12 +39,12 @@ public class MedicalAdministrator implements Commands {
 
     private void printTodaysPatient() {
         Date date = new Date();
-        String[] s1 = DateUtil.dateToString(date).split(" ");
+        String[] todayDateStr = DateUtil.dateToString(date).split(" ");
         Patient[] allPatient = medicalStorage.getAllPatient();
         try {
             for (int i = 0; i < allPatient.length; i++) {
-                String[] s = DateUtil.dateToString(allPatient[i].getRegisterDate()).split(" ");
-                if (s[0].equals(s1[0])) {
+                String[] patientDateStr = DateUtil.dateToString(allPatient[i].getRegisterDate()).split(" ");
+                if (patientDateStr[0].equals(todayDateStr[0])) {
                     System.out.println(allPatient[i]);
                 }
             }
