@@ -5,10 +5,10 @@ import java.util.Objects;
 public abstract class Person {
 
 
-    protected String id;
-    protected String name;
-    protected String surname;
-    protected String phoneNumber;
+    private String id;
+    private String name;
+    private String surname;
+    private String phoneNumber;
 
     public Person() {
     }
@@ -77,11 +77,9 @@ public abstract class Person {
 
     @Override
     public String toString() {
-        return "Person{" +
-                "id='" + id + '\'' +
+        return "id='" + id + '\'' +
                 ", name='" + name + '\'' +
                 ", surname='" + surname + '\'' +
-                ", phoneNumber='" + phoneNumber + '\'' +
-                '}';
+                ", phoneNumber='" + phoneNumber + '\'' + ", ";
     }
 }

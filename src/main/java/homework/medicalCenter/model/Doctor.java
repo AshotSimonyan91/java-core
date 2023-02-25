@@ -44,47 +44,6 @@ public class Doctor extends Person {
         this.patientDateAndTime[patientDateAndTimeIndex++] = patientDateAndTime;
     }
 
-
-    @Override
-    public String getId() {
-        return super.getId();
-    }
-
-    @Override
-    public void setId(String id) {
-        super.setId(id);
-    }
-
-    @Override
-    public String getName() {
-        return super.getName();
-    }
-
-    @Override
-    public void setName(String name) {
-        super.setName(name);
-    }
-
-    @Override
-    public String getSurname() {
-        return super.getSurname();
-    }
-
-    @Override
-    public void setSurname(String surname) {
-        super.setSurname(surname);
-    }
-
-    @Override
-    public String getPhoneNumber() {
-        return super.getPhoneNumber();
-    }
-
-    @Override
-    public void setPhoneNumber(String phoneNumber) {
-        super.setPhoneNumber(phoneNumber);
-    }
-
     public String getEmail() {
         return email;
     }
@@ -126,15 +85,10 @@ public class Doctor extends Person {
 
     @Override
     public String toString() {
-        return "\n" + "Doctor{" +
-                "id='" + id + '\'' +
-                ", name='" + name + '\'' +
-                ", surname='" + surname + '\'' +
-                ", phoneNumber='" + phoneNumber + '\'' +
-                ", email='" + email + '\'' +
+        return "Doctor{" + super.toString() +
+                "email='" + email + '\'' +
                 ", profession='" + profession + '\'' +
                 ", patientDateAndTime=" + Arrays.toString(patientDateAndTime) +
-                '}' + "\n";
+                "} ";
     }
-
 }
