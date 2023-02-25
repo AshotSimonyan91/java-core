@@ -100,7 +100,7 @@ public class MedicalAdministrator implements Commands {
         System.out.println(Arrays.toString(medicalStorage.getAllDoctor()));
         System.out.println("Please input doctor by doctor ID");
         String idStr = scanner.nextLine();
-        System.out.println("Please input date and time  (dd/MM/yyyy HH:mm:ss)");
+        System.out.println("Please input date and time  (dd/MM/yyyy HH:mm)");
         String dateStr = scanner.nextLine();
         if (medicalStorage.getDoctorByDoctorID(idStr) == null) {
             System.out.println("doctor with " + '\'' + idStr + '\'' + " not exist");
@@ -147,8 +147,6 @@ public class MedicalAdministrator implements Commands {
         doctorByDoctorID.setEmail(scanner.nextLine());
         System.out.println("Please input profession");
         doctorByDoctorID.setProfession(scanner.nextLine());
-
-        medicalStorage.add(doctorByDoctorID);
     }
 
     private void deleteDoctorByID() {
