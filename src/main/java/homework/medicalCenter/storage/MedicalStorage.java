@@ -110,7 +110,7 @@ public class MedicalStorage {
         Doctor[] allDoctor = getAllDoctor();
         int arrayPersonIndex = 0;
         for (int i = 0; i < allDoctor.length; i++) {
-            if (Objects.equals(allDoctor[i].getProfession(),value)) {
+            if (Objects.equals(allDoctor[i].getProfession().name(),value.toUpperCase())) {
                 arrayDoctor[arrayPersonIndex++] = allDoctor[i];
             }
         }

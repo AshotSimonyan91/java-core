@@ -1,5 +1,6 @@
 package homework.medicalCenter.model;
 
+import homework.medicalCenter.Profession;
 import homework.medicalCenter.parent.Person;
 
 import java.util.Arrays;
@@ -9,7 +10,7 @@ import java.util.Objects;
 public class Doctor extends Person {
 
     private String email;
-    private String profession;
+    private Profession profession;
     private Date[] patientDateAndTime;
     private int patientDateAndTimeIndex;
 
@@ -18,7 +19,7 @@ public class Doctor extends Person {
         patientDateAndTime = new Date[0];
     }
 
-    public Doctor(String id, String name, String surname, String phoneNumber, String email, String profession, int size) {
+    public Doctor(String id, String name, String surname, String phoneNumber, String email, Profession profession, int size) {
         super(id, name, surname, phoneNumber);
         patientDateAndTimeIndex = 0;
         this.patientDateAndTime = new Date[size];
@@ -52,11 +53,11 @@ public class Doctor extends Person {
         this.email = email;
     }
 
-    public String getProfession() {
+    public Profession getProfession() {
         return profession;
     }
 
-    public void setProfession(String profession) {
+    public void setProfession(Profession profession) {
         this.profession = profession;
     }
 
@@ -68,8 +69,9 @@ public class Doctor extends Person {
 
         Doctor doctor = (Doctor) o;
 
+        if (patientDateAndTimeIndex != doctor.patientDateAndTimeIndex) return false;
         if (!Objects.equals(email, doctor.email)) return false;
-        if (!Objects.equals(profession, doctor.profession)) return false;
+        if (profession != doctor.profession) return false;
         // Probably incorrect - comparing Object[] arrays with Arrays.equals
         return Arrays.equals(patientDateAndTime, doctor.patientDateAndTime);
     }
@@ -80,6 +82,7 @@ public class Doctor extends Person {
         result = 31 * result + (email != null ? email.hashCode() : 0);
         result = 31 * result + (profession != null ? profession.hashCode() : 0);
         result = 31 * result + Arrays.hashCode(patientDateAndTime);
+        result = 31 * result + patientDateAndTimeIndex;
         return result;
     }
 

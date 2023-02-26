@@ -146,7 +146,18 @@ public class MedicalAdministrator implements Commands {
         System.out.println("Please input email");
         doctorByDoctorID.setEmail(scanner.nextLine());
         System.out.println("Please input profession");
-        doctorByDoctorID.setProfession(scanner.nextLine());
+        System.err.println("e.g. FAMILY_PHYSICIANS, INTERNISTS, EMERGENCY_PHYSICIANS, PSYCHIATRISTS");
+        String professionStr = scanner.nextLine();
+        switch (professionStr.toUpperCase()) {
+            case "FAMILY_PHYSICIANS" -> doctorByDoctorID.setProfession(Profession.FAMILY_PHYSICIANS);
+            case "INTERNISTS" -> doctorByDoctorID.setProfession(Profession.INTERNISTS);
+            case "EMERGENCY_PHYSICIANS" -> doctorByDoctorID.setProfession(Profession.EMERGENCY_PHYSICIANS);
+            case "PSYCHIATRISTS" -> doctorByDoctorID.setProfession(Profession.PSYCHIATRISTS);
+            default -> {
+                System.out.println("Wrong profession");
+                return;
+            }
+        }
     }
 
     private void deleteDoctorByID() {
@@ -158,14 +169,6 @@ public class MedicalAdministrator implements Commands {
         System.out.println("Please input doctor ID for delete doctor");
         String idStr = scanner.nextLine();
         medicalStorage.deleteDoctorByID(idStr);
-        Patient[] allPatient = medicalStorage.getAllPatient();
-        for (int i = 0; i < allPatient.length; i++) {
-            if (allPatient[i].getDoctor().getId().equals(idStr)) {
-                allPatient[i].setDoctor(new Doctor("", "", "", "", "", "", 0));
-                medicalStorage.add(allPatient[i]);
-            }
-        }
-
     }
 
     private void searchDoctorByProfession() {
@@ -207,7 +210,18 @@ public class MedicalAdministrator implements Commands {
         System.out.println("Please input doctor's email");
         doctor.setEmail(scanner.nextLine());
         System.out.println("Please input doctor's profession");
-        doctor.setProfession(scanner.nextLine());
+        System.err.println("e.g. FAMILY_PHYSICIANS, INTERNISTS, EMERGENCY_PHYSICIANS, PSYCHIATRISTS");
+        String professionStr = scanner.nextLine();
+        switch (professionStr.toUpperCase()) {
+            case "FAMILY_PHYSICIANS" -> doctor.setProfession(Profession.FAMILY_PHYSICIANS);
+            case "INTERNISTS" -> doctor.setProfession(Profession.INTERNISTS);
+            case "EMERGENCY_PHYSICIANS" -> doctor.setProfession(Profession.EMERGENCY_PHYSICIANS);
+            case "PSYCHIATRISTS" -> doctor.setProfession(Profession.PSYCHIATRISTS);
+            default -> {
+                System.out.println("Wrong profession");
+                return;
+            }
+        }
 
 
         medicalStorage.add(doctor);
