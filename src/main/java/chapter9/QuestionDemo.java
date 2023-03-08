@@ -1,0 +1,11 @@
+package chapter9;
+
+public class QuestionDemo {
+    public static void main(String[] args) {
+        Question q = new Question();
+        AskMe.answer(q.ask());
+        AskMe.answer(q.ask());
+        AskMe.answer(q.ask());
+        AskMe.answer(q.ask());
+    }
+}
