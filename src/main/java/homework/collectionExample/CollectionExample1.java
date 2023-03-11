@@ -32,7 +32,7 @@ public class CollectionExample1 {
 
     public void deleteName(Scanner scanner) {
         String s = scanner.nextLine();
-        names.remove(s);
+        names.removeIf(name->name.equalsIgnoreCase(s));
         System.out.println(names.toString());
     }
 
