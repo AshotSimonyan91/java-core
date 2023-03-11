@@ -1,14 +1,13 @@
 package homework.collectionExample;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class CollectionExample1 {
 
-    Scanner scanner;
-    ArrayList<String> names;
-
-    boolean isExist = false;
+    private final Scanner scanner;
+    private final List<String> names;
 
     public CollectionExample1(Scanner scanner, ArrayList<String> name) {
         this.scanner = scanner;
@@ -20,29 +19,20 @@ public class CollectionExample1 {
         this.names.add(name);
     }
 
-    public void isExist(Scanner scanner) {
+    public boolean isExist(Scanner scanner) {
         String s = scanner.nextLine();
         for (String nameStr : names) {
             if (nameStr.equalsIgnoreCase(s)) {
-                isExist = true;
-                break;
+                return true;
             }
         }
-        if (isExist) {
-            System.out.println("Name exists");
-        }else {
-            System.out.println("Name doesn't exist");
-        }
+        return false;
     }
 
 
     public void deleteName(Scanner scanner) {
         String s = scanner.nextLine();
-        for (int i = 0; i < names.size(); i++) {
-            if (names.get(i).equalsIgnoreCase(s)) {
-                names.remove(i);
-            }
-        }
+        names.remove(s);
         System.out.println(names.toString());
     }
 

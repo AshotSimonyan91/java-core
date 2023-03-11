@@ -25,7 +25,11 @@ public class CollectionExample1Demo {
                 case "0" -> isTrue = false;
                 case "1" -> {
                     System.out.println("Input name");
-                    name.isExist(scanner);
+                    if (name.isExist(scanner)) {
+                        System.out.println("Name exists");
+                    }else {
+                        System.out.println("Name doesn't exist");
+                    }
                 }
                 case "2" -> {
                     System.out.println(name.toString());
