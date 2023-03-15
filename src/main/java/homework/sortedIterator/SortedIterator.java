@@ -13,14 +13,12 @@ public class SortedIterator<T> implements Iterator {
 
     public static <T> SortedIterator<T> fromList(T[] array) {
         Arrays.sort(array);
-        SortedIterator<T> elements = new SortedIterator<>(Arrays.asList(array));
-        return elements;
+        return new SortedIterator<>(Arrays.asList(array));
     }
 
     public static <T> SortedIterator<T> fromList(T[] array, Comparator<T> comparator) {
-        Arrays.sort(array,comparator);
-        SortedIterator<T> elements = new SortedIterator<>(Arrays.asList(array));
-        return elements;
+        Arrays.sort(array, comparator);
+        return new SortedIterator<>(Arrays.asList(array));
     }
 
     @Override
@@ -34,7 +32,7 @@ public class SortedIterator<T> implements Iterator {
             return null;
         }
         T t = elements.get(count);
-        count ++;
+        count++;
         return t;
     }
 
