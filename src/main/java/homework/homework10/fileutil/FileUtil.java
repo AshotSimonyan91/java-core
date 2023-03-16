@@ -2,6 +2,7 @@ package homework.homework10.fileutil;
 
 import java.io.*;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class FileUtil {
@@ -12,7 +13,7 @@ public class FileUtil {
         System.out.println(fileSearch());
 
 
-        ArrayList<String> strings = contentSearch();
+        List<String> strings = contentSearch();
         for (String string : strings) {
             System.out.println(string);
         }
@@ -44,8 +45,8 @@ public class FileUtil {
     // 2 - keyword - ինչ որ բառ
     // Մեթոդը պետք է նշված path-ում գտնի բոլոր .txt ֆայլերը, և իրենց մեջ փնտրի
     // մեր տված keyword-ը, եթե գտնի, պետք է տպի տվյալ ֆայլի անունը։
-    static ArrayList<String> contentSearch() {
-        ArrayList<String> names = new ArrayList<>();
+    static List<String> contentSearch() {
+        List<String> names = new ArrayList<>();
         String path = scanner.nextLine();
         String keyword = scanner.nextLine();
         File file = new File(path);
