@@ -35,7 +35,7 @@ public class FileUtil {
     static boolean fileSearch() {
         String path = scanner.nextLine();
         String fileName = scanner.nextLine();
-        File file = new File(path + "/" + fileName);
+        File file = new File(path + File.separator + fileName);
         if (file.exists()) return true;
         return false;
     }
@@ -112,7 +112,7 @@ public class FileUtil {
         String path = scanner.nextLine();
         String fileName = scanner.nextLine();
         String content = scanner.nextLine();
-        File file = new File(path + "/" + fileName);
+        File file = new File(path + File.separator + fileName);
         if (!file.exists()) {
             try {
                 file.createNewFile();
