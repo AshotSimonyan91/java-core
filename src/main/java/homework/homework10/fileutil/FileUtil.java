@@ -18,12 +18,9 @@ public class FileUtil {
             System.out.println(string);
         }
 
-
         findLines();
 
-
         System.out.println(printSizeOfPackage());
-
 
         createFileWithContent();
     }
